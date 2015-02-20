@@ -7,74 +7,43 @@ using namespace std;
 int max(int a, int b);
 int ilen(int);
 
+class Node;
+
 int main()
 {
-	errno_t err;
-	
-	int count_lines = 0,
-		max_count_simbols = 0;
+	int x, i = 0, n = 1;
+	FILE* f;
+	fopen_s(&f, "Triangle.in", "rt");
 
-	FILE *f;
+	Node** Tree = new Node* [100];
 
-	err = fopen_s(&f, "Triangle.in", "rt");
-
-	if (err == 0)
+	while ( fscanf(f,"%i",&x)==1 )						//i+1*j
 	{
-		printf("The file 'crt_fopen_s.c' was opened\n\n");
-	}
-	else
-	{
-		printf("The file 'crt_fopen_s.c' was not opened\n\n");
-		system("pause");
-		return 0;
-	}
-
-	int i_x = 0, i = 0, j = 0;
-	char result_string[20];
-	while (fgets(result_string, sizeof(result_string), f))
-	{
-		count_lines++;
-
-		//cout << sscanf_s(result_string, "%i", &x) << endl;
-		for (char* start = result_string, c_x[128]; 
-			sscanf_s(result_string, "%i", &i_x) == 1, sscanf_s(result_string, "%s", c_x);
-			 start = strstr(start, c_x) + ilen(i_x))
-		{
-			max_count_simbols = max(max_count_simbols, strlen(result_string));
-			max_count_simbols++;
-			cout << max_count_simbols;
-		}
 		
-		/*(sscanf_s(result_string, "%i", &x))
+		if (!Tree[i])
 		{
-			
-			max_count_simbols++;
-			cout << max_count_simbols;
-		}*/ 
-
+			Tree[i] = new Node(x);		  
+		}
+		else
+		{
+			Tree[i]->x = x;
+		}
+		Tree[i + 1] = new Node(0);
+		Tree[i + 2] = new Node(0);
+/*
+		if (j = 0)
+		{
+		   Tree[j - 1]->ln = Tree[i];
+		}
+		if (j = 1)
+		{
+			Tree[j - 1]->ln = Tree[i];
+			Tree[j - 1]->rn = Tree[i + 1];
+		}
+*/
+		i++;
 	}
-												  // sscanf
 	fclose(f);
-
-	// int **A = new int[count_lines];
-	// for(int i = 0; i < count_lines; i++)
-	//     A[i] = new int [max_count_simbols];
-
-	// char *real_tail;
-
-	//     while(fgets(result_sting,sizeof(result_sting),f))
-	//     {
-	// 		count_lines++;
-	// 		while( fscanf('%i', f) == 1)
-	// 		{
-	// 		    max_count_simbols = max(max_count_simbols,strlen(result_sting));
-	// 		    max_count_simbols++;
-	// 		}
-	//     }
-
-	cout << count_lines << " : " << max_count_simbols << endl;
-
-	system("pause");
 
 	return 0;
 }
@@ -97,3 +66,24 @@ int ilen(int a)
 
 	return i;
 }
+
+class Node
+{
+public:
+	int x;
+
+	Node *ln;
+	Node *rn;
+
+	Node(int _x)
+	{
+		ln = NULL;
+		rn = NULL;
+		x = _x;
+	}
+
+	int go()
+	{
+		return 0;
+	}
+};
