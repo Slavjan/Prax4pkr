@@ -20,6 +20,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Debug\Triangle.in" />
+    <None Include="..\Debug\Triangle.in">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

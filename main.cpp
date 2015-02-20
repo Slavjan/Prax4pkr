@@ -4,11 +4,8 @@
 
 using namespace std;
 
-int max(int a, int b)
-{
-	return (a>b) ? a : b;
-
-}
+int max(int a, int b);
+int ilen(int);
 
 int main()
 {
@@ -23,29 +20,40 @@ int main()
 
 	if (err == 0)
 	{
-		printf("The file 'crt_fopen_s.c' was opened\n");
+		printf("The file 'crt_fopen_s.c' was opened\n\n");
 	}
 	else
 	{
-		printf("The file 'crt_fopen_s.c' was not opened\n");
+		printf("The file 'crt_fopen_s.c' was not opened\n\n");
 		system("pause");
 		return 0;
 	}
 
-	int x = 0, i = 0, j = 0;
+	int i_x = 0, i = 0, j = 0;
 	char result_string[20];
 	while (fgets(result_string, sizeof(result_string), f))
 	{
 		count_lines++;
-		while ( x > 0 && x <= 9)
+
+		//cout << sscanf_s(result_string, "%i", &x) << endl;
+		for (char* start = result_string, c_x[128]; 
+			sscanf_s(result_string, "%i", &i_x) == 1, sscanf_s(result_string, "%s", c_x);
+			 start = strstr(start, c_x) + ilen(i_x))
 		{
-			sscanf_s(result_string, "%i", &x);
 			max_count_simbols = max(max_count_simbols, strlen(result_string));
 			max_count_simbols++;
 			cout << max_count_simbols;
 		}
-	}
+		
+		/*(sscanf_s(result_string, "%i", &x))
+		{
+			
+			max_count_simbols++;
+			cout << max_count_simbols;
+		}*/ 
 
+	}
+												  // sscanf
 	fclose(f);
 
 	// int **A = new int[count_lines];
@@ -69,4 +77,23 @@ int main()
 	system("pause");
 
 	return 0;
+}
+
+int max(int a, int b)
+{
+	return (a>b) ? a : b;
+
+}
+
+int ilen(int a)
+{
+	int i = 0;
+
+	do
+	{
+		a %= 10;
+		i++;
+	} while (a != 0);
+
+	return i;
 }
