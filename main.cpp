@@ -4,8 +4,22 @@
 
 using namespace std;
 
-int max(int a, int b);
-int ilen(int);
+int max(int a, int b){
+    return (a>b)? a : b;
+}
+
+int ilen(int a)
+{
+    int i = 0;
+
+    do
+    {
+        a %= 10;
+        i++;
+    } while (a != 0);
+
+    return i;
+}
 
 class Node
 {
@@ -34,7 +48,10 @@ public:
 
 	int go()
 	{
-		return 0;
+        if( ln == NULL || rn == NULL )
+            return x;
+        else
+            return max( ln->go(), rn->go() );
 	}
 };
 
@@ -65,23 +82,3 @@ int main()
 
 	return 0;
 }
-
-int max(int a, int b)
-{
-	return (a>b) ? a : b;
-
-}
-
-int ilen(int a)
-{
-	int i = 0;
-
-	do
-	{
-		a %= 10;
-		i++;
-	} while (a != 0);
-
-	return i;
-}
-
