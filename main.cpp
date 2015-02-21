@@ -7,7 +7,36 @@ using namespace std;
 int max(int a, int b);
 int ilen(int);
 
-class Node;
+class Node
+{
+public:
+	int x;
+
+	Node *ln;
+	Node *rn;
+
+	void operator =(Node a)
+	{
+		this->x = a.x;
+	}
+	void operator =(Node* a)
+	{
+		x = a->x;
+	}
+
+
+	Node(int _x = 0)
+	{
+		ln = NULL;
+		rn = NULL;
+		x = _x;
+	}
+
+	int go()
+	{
+		return 0;
+	}
+};
 
 int main()
 {
@@ -15,32 +44,21 @@ int main()
 	FILE* f;
 	fopen_s(&f, "Triangle.in", "rt");
 
-	Node** Tree = new Node* [100];
+	Node *Tree = new Node [100];
 
-	while ( fscanf(f,"%i",&x)==1 )						//i+1*j
-	{
-		
-		if (!Tree[i])
+	while ( fscanf_s(f,"%i",&x)==1 )						//i+1*j
+	{			
+		Tree[i].x = x;
+	
+		if (i%2 == 0 && i != 0)
 		{
-			Tree[i] = new Node(x);		  
+			Tree[i - 1].rn->operator=(Tree[i]);
 		}
-		else
+		else if (i % 2 != 0 && i != 0)
 		{
-			Tree[i]->x = x;
+			Tree[i - 1].ln->operator=(Tree[i]);
 		}
-		Tree[i + 1] = new Node(0);
-		Tree[i + 2] = new Node(0);
-/*
-		if (j = 0)
-		{
-		   Tree[j - 1]->ln = Tree[i];
-		}
-		if (j = 1)
-		{
-			Tree[j - 1]->ln = Tree[i];
-			Tree[j - 1]->rn = Tree[i + 1];
-		}
-*/
+
 		i++;
 	}
 	fclose(f);
@@ -67,23 +85,3 @@ int ilen(int a)
 	return i;
 }
 
-class Node
-{
-public:
-	int x;
-
-	Node *ln;
-	Node *rn;
-
-	Node(int _x)
-	{
-		ln = NULL;
-		rn = NULL;
-		x = _x;
-	}
-
-	int go()
-	{
-		return 0;
-	}
-};
