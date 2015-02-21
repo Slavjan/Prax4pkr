@@ -31,14 +31,14 @@ public:
 	Node *ln;
 	Node *rn;
 
-	void operator =(Node a)
-	{
-        x = a.x;
-	}
-	void operator =(Node* a)
-	{
-		x = a->x;
-	}
+//	void operator =(Node a)
+//	{
+//        x = a.x;
+//	}
+//	void operator =(Node* a)
+//	{
+//		x = a->x;
+//	}
 
 
 	Node(int _x = 0)
@@ -86,6 +86,8 @@ int main()
 	
         // Вот, это была вакханалия...
         // я долго ржал :D
+        // ...
+        // а потом понял что без неё не работает ...
 		if (i%2 == 0 && i != 0)
 		{
             Tree[i - 1].rn = Tree[i];
