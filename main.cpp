@@ -2,6 +2,8 @@
 #include <string.h>
 #include <iostream>
 
+//#define VS
+
 using namespace std;
 
 int max(int a, int b){
@@ -31,7 +33,7 @@ public:
 
 	void operator =(Node a)
 	{
-		this->x = a.x;
+        x = a.x;
 	}
 	void operator =(Node* a)
 	{
@@ -82,13 +84,15 @@ int main()
 	{			
 		Tree[i].x = x;
 	
+        // Вот, это была вакханалия...
+        // я долго ржал :D
 		if (i%2 == 0 && i != 0)
 		{
-			Tree[i - 1].rn->operator=(Tree[i]);
+            Tree[i - 1].rn = Tree[i];
 		}
 		else if (i % 2 != 0 && i != 0)
 		{
-			Tree[i - 1].ln->operator=(Tree[i]);
+            Tree[i - 1].ln = Tree[i];
 		}
 
 		i++;
