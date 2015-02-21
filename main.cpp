@@ -57,13 +57,28 @@ public:
 
 int main()
 {
+    char* fileIn = "Triangle.in";
+    char* fileOut = "Triangle.out";
 	int x, i = 0, n = 1;
 	FILE* f;
-	fopen_s(&f, "Triangle.in", "rt");
+    #ifdef VS
+        fopen_s(&f, fileIn, "rt");
+    #else
+        f = fopen(fileIn, "rt");
+    #endif
+
+    if( f == 0 ){
+        printf("File '%s' is not exists", fileIn);
+        return 1;
+    }
 
 	Node *Tree = new Node [100];
 
-	while ( fscanf_s(f,"%i",&x)==1 )						//i+1*j
+    #ifdef VS
+        while ( fscanf_s(f,"%i",&x)==1 )						//i+1*j
+    #else
+        while( fscanf(f, "%i", &x) == 1 )
+    #endif
 	{			
 		Tree[i].x = x;
 	
